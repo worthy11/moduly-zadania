@@ -1,0 +1,67 @@
+# Each block starts with RUN and ends with END.
+# Commands:
+#   CONSISTENT seated capacity expected(true|false)
+#   JOIN expectedOk expectedSeated
+#   LEAVE expectedOk expectedSeated
+#   SET seated capacity
+# State is kept between commands inside one RUN.
+
+RUN capacity2
+SET 0 2
+CONSISTENT 0 2 true
+JOIN true 1
+JOIN true 2
+JOIN false 2
+END
+
+RUN leave_from_full
+SET 2 2
+LEAVE true 1
+LEAVE true 0
+LEAVE false 0
+END
+
+RUN bad_states
+CONSISTENT 0 0 false
+CONSISTENT 3 2 false
+CONSISTENT -1 5 false
+CONSISTENT 10 60 true
+CONSISTENT 50 50 true
+CONSISTENT 51 50 false
+CONSISTENT 101 100 false
+END
+
+RUN join_leave_inconsistent
+SET 0 0
+JOIN false 0
+LEAVE false 0
+END
+
+RUN single_seat
+SET 0 1
+CONSISTENT 0 1 true
+JOIN true 1
+JOIN false 1
+LEAVE true 0
+LEAVE false 0
+END
+
+RUN mid_size_room
+SET 0 5
+JOIN true 1
+JOIN true 2
+JOIN true 3
+LEAVE true 2
+JOIN true 3
+JOIN true 4
+JOIN true 5
+JOIN false 5
+END
+
+RUN capacity_bounds
+CONSISTENT 0 1 true
+CONSISTENT 1 1 true
+CONSISTENT 0 100 true
+CONSISTENT 100 100 true
+CONSISTENT 0 101 false
+END

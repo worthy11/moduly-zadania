@@ -1,0 +1,5 @@
+231045 230001 shared-room
+231045 241045 separate-rooms
+23x045 231045 rejected
+EMPTY 231045 rejected
+231045 EMPTY rejected

@@ -1,0 +1,19 @@
+summary
+fine 10
+summary
+fine 20
+fine 6
+summary
+undo
+summary
+undo
+summary
+undo
+summary
+undo
+reset
+summary
+fine -3
+fine 9
+summary
+exit

@@ -1,0 +1,33 @@
+# RESET
+# FINE amount
+# UNDO
+# WRITE path minTotal expected(true|false)
+# EXPECT_MISSING path
+# EXPECT_FILE path golden_file
+
+RESET
+WRITE receipt.txt 0 false
+EXPECT_MISSING receipt.txt
+
+FINE 10
+FINE 20
+FINE 6
+WRITE receipt.txt 0 true
+EXPECT_FILE receipt.txt data/golden_three.txt
+
+WRITE receipt.txt 40 false
+EXPECT_FILE receipt.txt data/golden_three.txt
+
+FINE 4
+WRITE receipt.txt 40 true
+EXPECT_FILE receipt.txt data/golden_four.txt
+
+WRITE missing-dir/x.txt 0 false
+
+UNDO
+WRITE receipt.txt 0 true
+EXPECT_FILE receipt.txt data/golden_three.txt
+
+RESET
+WRITE receipt.txt 0 false
+EXPECT_FILE receipt.txt data/golden_three.txt

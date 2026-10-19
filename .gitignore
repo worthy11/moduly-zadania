@@ -1,0 +1,17 @@
+build/
+**/build/
+gcm.cache/
+__pycache__/
+.tools/
+*.obj
+*.o
+*.pcm
+*.ifc
+*.gcm
+*.exe
+*.pdb
+*.ilk
+*.lib
+*.exp
+receipt.txt
+output.txt
